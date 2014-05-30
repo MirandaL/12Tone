@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>12-Tone</title>
+<meta charset="utf-8">
+<script src="12tonejs.js"></script>
+<style type="text/css">
+html{
+background-color:LightBlue;
+}
+body{
+background-color:MediumSlateBlue;
+margin-left:20%;
+margin-right:20%;
+border:2px solid black;
+padding: 10px 10px 10px 10px;
+font-family:sans-serif; 
+}
+table {
+border:2px solid Navy;
+background-color:CadetBlue;
+
+}
+</style>
+</head>
+<body>
+<h1>12 Tone Matrix Generator</h1>
+<h2>Enter your initial row and numbers here:</h2>
+<form>
+<h3>Pitches (sharps only) Comma-Separated</h3>
+<input type="text" id="pitches" placeholder="D,D#,E,E#,F#,G,G#,A,A#,B,C,C#">
+<input type="button" id="addButton" value="Generate matrix">
+</form>
+<form id="matrixForm">
+<table id="prime">
+</table>
+</form>
+<form id="tempo">
+<lable id="tempoLable"></lable>
+</form>
+</body>
+</html>
