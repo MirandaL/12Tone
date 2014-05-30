@@ -3,6 +3,7 @@ function init(){
     var button= document.getElementById("addButton");
     button.onclick=handleButtonClick;
 }
+//Hello
 function assignNumbersToPitches(pitches,baseArray){
     var pitchArray=pitches.split(",");
     var numberArray=new Array;
