@@ -3,7 +3,7 @@ function init(){
     var button= document.getElementById("addButton");
     button.onclick=handleButtonClick;
 }
-//Hello
+
 function assignNumbersToPitches(pitches,baseArray){
     var pitchArray=pitches.split(",");
     var numberArray=new Array;
@@ -40,6 +40,13 @@ function handleButtonClick()
     bufferP=x.value.split(",");
     initialRow=new Array;
    initialColumn=new Array;
+for(var i=0;i<12;i++){
+var repeat=appearsNumber(bufferP[i],bufferP);
+if(repeat>1){
+alert("You have repeated pitches in your initial row.");
+return;
+}
+}
     if(bufferP.length !=12 || y.length !=12){
 	for(i=0;i<12;i++){
 	    if(bufferP.indexOf(baseArray[i])==-1){
@@ -74,15 +81,51 @@ function handleButtonClick()
     cell.innerHTML="<b>Prime Rows</b>";
     for(i=0;i<12;i++){
 	var dataRow=table.insertRow(i+1);
-	for(j=0;j<=12;j++){
+	for(j=0;j<=15;j++){
+	    if(j==13){
+		var name="boxI" + i;
+                var checkBox=document.createElement("input");
+                checkBox.type="checkbox";
+                checkBox.value="Play row";
+                checkBox.id=name;
+                var dataCell=dataRow.insertCell(j);
+                dataCell.style.backgroundColor="MidnightBlue";
+                dataCell.style.width="40px";
+                dataCell.appendChild(checkBox);
+                continue;
+	    }
+	    if(j==14){
+		var name="boxR" + i;
+                var checkBox=document.createElement("input");
+                checkBox.type="checkbox";
+                checkBox.value="Play row";
+                checkBox.id=name;
+                var dataCell=dataRow.insertCell(j);
+                dataCell.style.backgroundColor="MidnightBlue";
+                dataCell.style.width="40px";
+                dataCell.appendChild(checkBox);
+                continue;
+	    }
+	    if(j==15){
+		var name="boxIR" + i;
+                var checkBox=document.createElement("input");
+                checkBox.type="checkbox";
+                checkBox.value="Play row";
+                checkBox.id=name;
+                var dataCell=dataRow.insertCell(j);
+                dataCell.style.backgroundColor="MidnightBlue";
+                dataCell.style.width="40px";
+                dataCell.appendChild(checkBox);
+                continue;
+	    }
 	    if(j==12){
-                var name="box" + i;
+                var name="boxP" + i;
                 var checkBox=document.createElement("input");
                 checkBox.type="checkbox";
                 checkBox.value="Play row";
                 checkBox.id=name;
 		var dataCell=dataRow.insertCell(j);
-		dataCell.style.backgroundColor="grey";
+		dataCell.style.backgroundColor="MidnightBlue";
 		dataCell.style.width="40px";
 		dataCell.appendChild(checkBox);
 		continue;
@@ -131,8 +174,32 @@ function handleButtonClick()
                 }
                  dataCell.innerHTML=initialRow[P][0];
             }
+	    
 	}
+
     }
+    var footer=table.createTFoot();
+            row=footer.insertRow(0);
+    for(i=0;i<16;i++){
+	cell=row.insertCell(i);
+	if(i==12){
+	    cell.innerHTML="Prime ";
+	}
+	else if(i==13){
+	    cell.innerHTML="Inverted ";
+
+}
+	else if(i==14){
+	    cell.innerHTML="Retrograde ";
+	}
+	else if(i==15){
+	    cell.innerHTML="Inverted Retrograde ";
+	}
+	else{
+	cell.innerHTML=" ";
+}
+}
+
     var newSlider=document.createElement("input");
     newSlider.type="range";
     newSlider.id="Tempo";
@@ -151,12 +218,32 @@ newLable.innerHTML="<b>Tempo</b>";
 		var checkName;
 		var buffer=new Array;
 		for(i=0;i<12;i++){
-		    checkName="box"+i;
+		    checkName="boxP"+i;
 		    if(document.getElementById(checkName).checked){
 			for(var j=0;j<12;j++){
 			rowPitches.push(document.getElementById("prime").rows[i+1].cells[j]);
 			}
 		  }
+		    checkName="boxI"+i;
+		    if(document.getElementById(checkName).checked){
+                       for(var j=0;j<12;j++){
+                        rowPitches.push(document.getElementById("prime").rows[j+1].cells[i]);
+                        }
+		    }
+		    checkName="boxR"+i;
+		    if(document.getElementById(checkName).checked){
+                        for(var j=11;j>=0;j--){
+                        rowPitches.push(document.getElementById("prime").rows[i+1].cells[j]);
+			}
+		    }
+		    checkName="boxIR"+i;
+		    if(document.getElementById(checkName).checked){
+                        for(var j=11;j>=0;j--){
+                        rowPitches.push(document.getElementById("prime").rows[j+1].cells[i]);
+                        }
+		    }
+
+
 		}
 		for(var i=0;i<rowPitches.length;i++){
 			buffer[i]=rowPitches[i].innerHTML;
